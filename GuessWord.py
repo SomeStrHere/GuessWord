@@ -5,7 +5,7 @@
 #https://www.youtube.com/watch?v=5aAkDVXxNhk&index=5&list=PLhP5GzqIk6qsYjU_3tod0nqoWGXlq9RvF and
 #https://knightlab.northwestern.edu/2014/06/05/five-mini-programming-projects-for-the-python-beginner/
 #
-#Version 0.1.3
+#Version 1.0.0
 #Versioning: a.b.c
 #a = major change, b = smaller change, c = minor changes (bug fixes, etc)
 #
@@ -45,7 +45,7 @@ def getWord() :
     return random.choice(words).upper() #returns a random choice from these words
 
 def readFile() : #Read the contents of file words.txt, if file isn't found create it.
-    """Read contents of a txt file."""
+    """Read contents of a words.txt file and returns a list of words."""
 
     #set permissions for accessing the file
     READ = "r"
@@ -108,6 +108,7 @@ def check(word, guesses, guess) :
     return(status)
 
 def playGame() :
+    """Determines if a users guess is correct and produces apropriate output."""
 
     word = getWord()
     guesses = [] #keep track of users guesses in this list
@@ -139,6 +140,7 @@ def playGame() :
     print('Yes, the word is ', word + '! You got it in ', len(guesses), 'tried.')
 
 def main() :
+    """Calls welcomeMenu() to start the game."""
     welcomeMenu()
 
 #__name__ is a special variable set by Python; if my code runs as a program, __name__ is set by Python
