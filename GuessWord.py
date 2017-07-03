@@ -55,8 +55,13 @@ def readFile() : #Read the contents of file words.txt, if file isn't found creat
     fileName = "words.txt"
 
     try :
-        dictionary = open(fileName, READ).readlines()
-        words = [word.strip() for word in dictionary]
+        #used this approach so closing file is handled automatically
+        #previousl wasn't able to call dictionary.close() in finally to close the file.
+        with open(fileName, READ) as f :
+            dictionary = f.readlines()
+
+       #dictionary = open(fileName, READ).readlines() #working implementation
+        words = [word.strip() for word in dictionary] #working implementation
 
     except : #Try to read file, if file not found, create file.
 
@@ -65,10 +70,6 @@ def readFile() : #Read the contents of file words.txt, if file isn't found creat
             print('Please create file with a list of words, called words.txt in program directory')
             welcomeMenu()
             
-    finally :
-        #dictionary.close()
-        print()
-
     return(words) #return words derived from the words.txt file
 
 def clearConsole(wait) : #function to clear console on Linux or Windows
