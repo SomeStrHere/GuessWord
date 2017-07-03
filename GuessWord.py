@@ -151,41 +151,39 @@ def playGame() :
     guesses = [] #keep track of users guesses in this list
     guessed = False
 
-    #while len(guesses) < guessLimit :
-    #    print()
-       #continue executing - TO DO
-    #   else :
-    #       print() 
-    #       print('You have reached the limit of guesses, please try again...')
-    #       print('Returning you to the menu... welcomeMenu()
+    while len(guesses) < userGuessLimit :
 
-    print('The word contains', len(word), ' letters.') #tells user how many letters are in the word
-    while not guessed:
-        text = 'Please enter 1 letter or a {}-letter word. '.format(len(word))
-        guess = input(text).upper() #Using .upper() so we can compare upper case to upper case.
-        if guess in guesses : #look to see if the users guess is already in the list guesses; i.e they have already guessed that letter
-            print('You already guessed "' + guess + '"')
-        elif len(guess) == len(word) : #if users guess is same length as the answer word, assign it to guesses 
-            guesses.append(guess)
-            if guess == word: #if user guessed the correct word, set guessed to true
-                guessed = True
+        print('The word contains', len(word), ' letters.') #tells user how many letters are in the word
+        while not guessed:
+            text = 'Please enter 1 letter or a {}-letter word. '.format(len(word))
+            guess = input(text).upper()
+            if guess in guesses :
+                print('You already guessed "' + guess + '"')
+            elif len(guess) == len(word) :
+                #if users guess is same length as the answer word, assign it to guesses
+                guesses.append(guess)
+                if guess == word :
+                    guessed = True
+                else :
+                    print('Sorry, that is incorrect.')
+
+            elif len(guess) == 1 :
+                guesses.append(guess)
+                result = check(word, guesses, guess)
+                if result == word :
+                    guessed = True
+                else :
+                    print(result)
             else :
-                print('Sorry, that is incorrect.')
-        elif len(guess) == 1: #check if the user entered a 1 letter character guess
-            guesses.append(guess) #if they guessed a 1 letter character add it to guesses
-            result = check(word, guesses, guess) #run check function
-            if result == word :
-                guessed = True
+                print('Invalid entry')
 
-            else :
-                print(result)
+        #print statement will execute when the user exits the while loop
+        print('Yes, the word is ', word + '! You got it in ', len(guesses), 'tried.')
 
-        else :
-            print('Invalid entry') #if user didn't enter 1 letter or a word with the same number of
-            #letters as the answer word
-
-    #print statement will execute when the user exits the while loop
-    print('Yes, the word is ', word + '! You got it in ', len(guesses), 'tried.')
+    else :
+        print('You have reached the limit of guesses, please try again...')
+        print('Returning you to the menu...') 
+        welcomeMenu()
 
 def main() :
     """Calls welcomeMenu() to start the game."""
@@ -196,4 +194,3 @@ def main() :
 #without running the main() function.
 if __name__ == "__main__" :
     main()
-
