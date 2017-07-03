@@ -24,6 +24,7 @@ def welcomeMenu() :
     print('########################\n')
 
     print('Please enter (1) Play Game or (2) Exit Game\n')
+    print('Optional: You can alter the default guess limit by pressing (0).\n')
     menuOption = input()
 
     if menuOption == '1' :
@@ -33,6 +34,9 @@ def welcomeMenu() :
         print('\nThank you for playing...\n')
         clearConsole(1)
         sys.exit()
+
+    elif menuOption == '0' :
+        guessLimit()
     else :
         clearConsole(0) #clear console without a delay
         welcomeMenu() #reload the menu
@@ -60,9 +64,9 @@ def guessLimit() : #obtain a guess limit from the user and return the limit numb
     else :
         userGuessLimit = userGuessLimit
 
-    print('Thank you, you have selected %d guesess' % userGuessLimit)
+    print('Thank you, you have selected %d guesess.\n' % userGuessLimit)
 
-    return(userGuessLimit)
+    playGame() #Once the user sets the guess limit, start the game
 
 def getWord() : 
     """Gets list of words from readFile() and returns a random a word out of the list."""
