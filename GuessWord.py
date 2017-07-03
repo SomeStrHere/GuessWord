@@ -37,6 +37,33 @@ def welcomeMenu() :
         clearConsole(0) #clear console without a delay
         welcomeMenu() #reload the menu
 
+def guessLimit() : #obtain a guess limit from the user and return the limit number
+    """Asks the user to select how many attempts they want at guessing the word."""
+    userGuessLimit = 8 #set defaul number to 8
+
+    print("How many attempts would you like to have?\n")
+    print('(A) Up to 20 guesses!\n')
+    print('(B) Up to 12 guesses!\n')
+    print('(C) Only 3 guesses!\n')
+    print('...or press any other key for the default.\n')
+    userChoice = input().upper()
+
+    if userChoice == 'A' :
+        userGuessLimit = 20
+
+    elif userChoice == 'B' :
+        userGuessLimit = 12
+
+    elif userChoice == 'C' :
+        userGuessLimit = 3
+
+    else :
+        userGuessLimit = userGuessLimit
+
+    print('Thank you, you have selected %d guesess' % userGuessLimit)
+
+    return(userGuessLimit)
+
 def getWord() : 
     """Gets list of words from readFile() and returns a random a word out of the list."""
 
@@ -137,6 +164,15 @@ def playGame() :
         else :
             print('Invalid entry') #if user didn't enter 1 letter or a word with the same number of
             #letters as the answer word
+
+    #While the number of recorded guesses is lesss than the guess limit from guessLimit()
+    #while len(guesses) < guessLimit() :
+    #    print()
+       #continue executing - TO DO
+    #   else :
+    #       print() 
+    #       print('You have reached the limit of guesses, please try again...')
+    #       print('Returning you to the menu... welcomeMenu()
 
     #print statement will execute when the user exits the while loop
     print('Yes, the word is ', word + '! You got it in ', len(guesses), 'tried.')
