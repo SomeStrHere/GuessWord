@@ -31,15 +31,14 @@ def welcomeMenu() :
 
     elif menuOption == '2' :
         print('\nThank you for playing...\n')
-        clearConsole(2)
+        clearConsole(1)
         sys.exit()
     else :
         clearConsole(0) #clear console without a delay
         welcomeMenu() #reload the menu
 
-def get_word() : #original function to get word from hard coded file
-
-    #words = ['Woodstock', 'Gary', 'Sophie'] 
+def getWord() : 
+    """Gets list of words from readFile() and returns a random a word out of the list."""
 
     words = readFile()
  
@@ -110,7 +109,7 @@ def check(word, guesses, guess) :
 
 def playGame() :
 
-    word = get_word()
+    word = getWord()
     guesses = [] #keep track of users guesses in this list
     guessed = False
     print('The word contains', len(word), ' letters.')
