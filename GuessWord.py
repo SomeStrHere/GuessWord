@@ -5,25 +5,15 @@
 #https://www.youtube.com/watch?v=5aAkDVXxNhk&index=5&list=PLhP5GzqIk6qsYjU_3tod0nqoWGXlq9RvF and
 #https://knightlab.northwestern.edu/2014/06/05/five-mini-programming-projects-for-the-python-beginner/
 #
-#Version 0.1.2
+#Version 0.1.3
 #Versioning: a.b.c
 #a = major change, b = smaller change, c = minor changes (bug fixes, etc)
 #
-#TO DO - how do do a docstring """What the function does goes here.""" put this in first line bellow 
-#function definition.
-#TO DO - regular expression example
-#    if not re.match("^[1-5]*$", menuChoice) or (int(menuChoice) > 5):
-#        print("Error! Only numbers 1-5 are allowed.")
-#        clearConsole(3)
-#        menu()
-#    else :
 
 #Import libraries
 import random
 import csv #I'd like to read a list of words from a csv file rather than have them coded in source
 import sys #Used to exit the program
-
-#Initialize variables and constants
 
 def welcomeMenu() :
     """Displays a welcome message to the user and gives a simple menu to start or exit the game."""
@@ -48,43 +38,39 @@ def welcomeMenu() :
         welcomeMenu() #reload the menu
 
 def get_word() : #original function to get word from hard coded file
-    #A function with a list of words
-    words = ['Woodstock', 
-             'Gary',
-             'Sophie']
 
-    #words = (readFile())
+    #words = ['Woodstock', 'Gary', 'Sophie'] 
 
+    words = readFile()
+ 
     return random.choice(words).upper() #returns a random choice from these words
 
 def readFile() : #Read the contents of file words.txt, if file isn't found create it.
-    """Read contents of a txtt file."""
+    """Read contents of a txt file."""
 
     #set permissions for accessing the file
     READ = "r"
     WRITE = "w"
+    #r+ = read and write
+    fileName = "words.txt"
 
     try :
-        file = open("words.txt", mode = READ)
-        #display all contents from file
-        entireFile = file.read() #will return the entire file contents as one big string
-    except :
-        #Try to read file, if file not found, create file.
+        #used this approach so closing file is handled automatically
+        #previousl wasn't able to call dictionary.close() in finally to close the file.
+        with open(fileName, READ) as f :
+            dictionary = f.readlines()
+
+       #dictionary = open(fileName, READ).readlines() #working implementation
+        words = [word.strip() for word in dictionary] #working implementation
+
+    except : #Try to read file, if file not found, create file.
 
         if FileNotFoundError :
             print('File not found...')
-            createFile = input('Would you like us to create a new file for you? (Y) ').upper()
-            if createFile == "Y" :
-                file = open("words.txt", mode = WRITE)
-                file.write('Hackers\n') #Write the first line of the newly created txt file
-                file.write('Mitnick') #Write the second line of the newly created txt file
-                entireFile = file.read() 
-            else :
-                welcomeMenu()
-    finally :
-        file.close()
-
-    return(entireFile)
+            print('Please create file with a list of words, called words.txt in program directory')
+            welcomeMenu()
+            
+    return(words) #return words derived from the words.txt file
 
 def clearConsole(wait) : #function to clear console on Linux or Windows
    """Accepts an integer argument and produces a delay for the number of seconds passed as an argument\
