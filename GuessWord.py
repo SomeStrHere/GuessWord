@@ -146,12 +146,13 @@ def playGame() :
     """Determines if a users guess is correct and produces apropriate output."""
 
     global userGuessLimit
-
     word = getWord()
-    guesses = [] #keep track of users guesses in this list
+    guesses = [] #keep track of users guesses in this list    
     guessed = False
 
-    while len(guesses) < userGuessLimit :
+    #Added this overall while loop to test leng(guesses) which should give the number of times a user
+    #guesses a word against a pre-defined/user set int variable called userGuessLimit.
+    while (len(guesses) < userGuessLimit) :
 
         print('The word contains', len(word), ' letters.') #tells user how many letters are in the word
         while not guessed:
@@ -178,7 +179,9 @@ def playGame() :
                 print('Invalid entry')
 
         #print statement will execute when the user exits the while loop
-        print('Yes, the word is ', word + '! You got it in ', len(guesses), 'tried.')
+        print('\nYes, the word is ', word + '! You got it in ', len(guesses), 'tries.')
+        break #added to make sure "limit of guesses" message doesn't follow the above when
+    #the user guesses the word correctly. #Seems to work in initial testing.
 
     else :
         print('You have reached the limit of guesses, please try again...')
