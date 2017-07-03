@@ -41,7 +41,23 @@ def get_word() : #original function to get word from hard coded file
 
     words = ['Woodstock', 'Gary', 'Sophie']
 
+    #words = []
+    #for line in open('words.txt', 'r'):
+    #    words.append(line)
+
+    #words = []
+    #csvr = csv.reader(open('words.txt' , 'r'))
+    #for row in csvr:
+    #    words.append(row)
+    #    print(row)
+
+    dictionary = open('words.txt', 'r').readlines()
+    words = [word.strip() for word in dictionary]
+    #return choice(words)
+
+
     #words = readFile()
+    #words = [element.upper() for element in list] gives error that object is not iterable
     
     return random.choice(words).upper() #returns a random choice from these words
 
