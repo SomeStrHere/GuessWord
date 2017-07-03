@@ -15,6 +15,9 @@ import random
 import csv #I'd like to read a list of words from a csv file rather than have them coded in source
 import sys #Used to exit the program
 
+#Global variables
+userGuessLimit = 8 #set defaul number to 8
+
 def welcomeMenu() :
     """Displays a welcome message to the user and gives a simple menu to start or exit the game."""
     print('\n########################')
@@ -43,13 +46,14 @@ def welcomeMenu() :
 
 def guessLimit() : #obtain a guess limit from the user and return the limit number
     """Asks the user to select how many attempts they want at guessing the word."""
-    userGuessLimit = 8 #set defaul number to 8
+    
+    global userGuessLimit
 
     print("How many attempts would you like to have?\n")
     print('(A) Up to 20 guesses!\n')
     print('(B) Up to 12 guesses!\n')
     print('(C) Only 3 guesses!\n')
-    print('...or press any other key for the default.\n')
+    print('...or press any other key for the default.\n') #default is 8
     userChoice = input().upper()
 
     if userChoice == 'A' :
@@ -169,8 +173,8 @@ def playGame() :
             print('Invalid entry') #if user didn't enter 1 letter or a word with the same number of
             #letters as the answer word
 
-    #While the number of recorded guesses is lesss than the guess limit from guessLimit()
-    #while len(guesses) < guessLimit() :
+    #While the number of recorded guesses is less than the guess limit from guessLimit()
+    #while len(guesses) < global guessLimit :
     #    print()
        #continue executing - TO DO
     #   else :
