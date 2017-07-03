@@ -42,7 +42,7 @@ def getWord() :
 
     words = readFile()
  
-    return random.choice(words).upper() #returns a random choice from these words
+    return random.choice(words).upper() #picks an element from a sequence
 
 def readFile() : #Read the contents of file words.txt, if file isn't found create it.
     """Read contents of a words.txt file and returns a list of words."""
@@ -87,16 +87,16 @@ def clearConsole(wait) : #function to clear console on Linux or Windows
        os.system('clear') #clears console on Linux
 
 def check(word, guesses, guess) :
-    status = ''
+    status = '' 
     matches = 0
-    for letter in word : #loop through letters in our word; we can loop through strings in Python
-        if letter  in guesses :
+    for letter in word : #loop through letters in 'word'; we can loop through strings in Python
+        if letter  in guesses : #if letter is in guesses add that letter to the status string
             status += letter
         else :
-            status += "*"
+            status += "*" #if letter not in guesses add a * to the status string
 
         if letter == guess :
-            matches += 1
+            matches += 1 #record number of matches for the users guess
     
     if matches > 1 :
         print('Yes! The word contains', matches, '"' + guess + '"' + 's' )
@@ -113,21 +113,21 @@ def playGame() :
     word = getWord()
     guesses = [] #keep track of users guesses in this list
     guessed = False
-    print('The word contains', len(word), ' letters.')
+    print('The word contains', len(word), ' letters.') #tells user how many letters are in the word
     while not guessed:
         text = 'Please enter 1 letter or a {}-letter word. '.format(len(word))
-        guess = input(text).upper()
-        if guess in guesses :
+        guess = input(text).upper() #Using .upper() so we can compare upper case to upper case.
+        if guess in guesses : #look to see if the users guess is already in the list guesses; i.e they have already guessed that letter
             print('You already guessed "' + guess + '"')
-        elif len(guess) == len(word) :
+        elif len(guess) == len(word) : #if users guess is same length as the answer word, assign it to guesses 
             guesses.append(guess)
             if guess == word: #if user guessed the correct word, set guessed to true
                 guessed = True
             else :
                 print('Sorry, that is incorrect.')
-        elif len(guess) == 1:
-            guesses.append(guess)
-            result = check(word, guesses, guess)
+        elif len(guess) == 1: #check if the user entered a 1 letter character guess
+            guesses.append(guess) #if they guessed a 1 letter character add it to guesses
+            result = check(word, guesses, guess) #run check function
             if result == word :
                 guessed = True
 
@@ -135,8 +135,10 @@ def playGame() :
                 print(result)
 
         else :
-            print('Invalid entry')
+            print('Invalid entry') #if user didn't enter 1 letter or a word with the same number of
+            #letters as the answer word
 
+    #print statement will execute when the user exits the while loop
     print('Yes, the word is ', word + '! You got it in ', len(guesses), 'tried.')
 
 def main() :
