@@ -5,7 +5,7 @@
 #https://www.youtube.com/watch?v=5aAkDVXxNhk&index=5&list=PLhP5GzqIk6qsYjU_3tod0nqoWGXlq9RvF and
 #https://knightlab.northwestern.edu/2014/06/05/five-mini-programming-projects-for-the-python-beginner/
 #
-#Version 0.1.2
+#Version 0.1.3
 #Versioning: a.b.c
 #a = major change, b = smaller change, c = minor changes (bug fixes, etc)
 #
@@ -48,37 +48,26 @@ def get_word() : #original function to get word from hard coded file
 def readFile() : #Read the contents of file words.txt, if file isn't found create it.
     """Read contents of a txt file."""
 
-    dictionary = open('words.txt', 'r').readlines()
-    words = [word.strip() for word in dictionary]
-    #return choice(words)
+    #set permissions for accessing the file
+    READ = "r"
+    WRITE = "w"
+    #r+ = read and write
+    fileName = "words.txt"
 
-    ##set permissions for accessing the file
-    #READ = "r"
-    #WRITE = "w"
-    ##r+ = read and write
-    #fileName = "words.txt"
+    try :
+        dictionary = open(fileName, READ).readlines()
+        words = [word.strip() for word in dictionary]
 
-    #try :
-    #    with open(fileName, READ) as csvFile :
-    #        dataFromFile = csv.reader(csvFile)
-    #        listFromFile = list(dataFromFile)
+    except : #Try to read file, if file not found, create file.
 
-    #    wordList = []
-    #    wordList = listFromFile
-
-    #except :
-    #    #Try to read file, if file not found, create file.
-
-    #    if FileNotFoundError :
-    #        print('File not found...')
-    #        createFile = input('Would you like us to create a new file for you? (Y) ').upper()
-    #        if createFile == "Y" :
-    #            file = open("words.txt", mode = WRITE)
-    #            file.write('Python') #Write the first line of the newly created txt file
-    #            file.close()
-    #            readFile() 
-    #        else :
-    #            welcomeMenu()
+        if FileNotFoundError :
+            print('File not found...')
+            print('Please create file with a list of words, called words.txt in program directory')
+            welcomeMenu()
+            
+    finally :
+        #dictionary.close()
+        print()
 
     return(words) #return words derived from the words.txt file
 
