@@ -39,60 +39,48 @@ def welcomeMenu() :
 
 def get_word() : #original function to get word from hard coded file
 
-    words = ['Woodstock', 'Gary', 'Sophie']
+    #words = ['Woodstock', 'Gary', 'Sophie'] 
 
-    #words = []
-    #for line in open('words.txt', 'r'):
-    #    words.append(line)
-
-    #words = []
-    #csvr = csv.reader(open('words.txt' , 'r'))
-    #for row in csvr:
-    #    words.append(row)
-    #    print(row)
-
-    dictionary = open('words.txt', 'r').readlines()
-    words = [word.strip() for word in dictionary]
-    #return choice(words)
-
-
-    #words = readFile()
-    #words = [element.upper() for element in list] gives error that object is not iterable
-    
+    words = readFile()
+ 
     return random.choice(words).upper() #returns a random choice from these words
 
 def readFile() : #Read the contents of file words.txt, if file isn't found create it.
     """Read contents of a txt file."""
 
-    #set permissions for accessing the file
-    READ = "r"
-    WRITE = "w"
-    #r+ = read and write
-    fileName = "words.txt"
+    dictionary = open('words.txt', 'r').readlines()
+    words = [word.strip() for word in dictionary]
+    #return choice(words)
 
-    try :
-        with open(fileName, READ) as csvFile :
-            dataFromFile = csv.reader(csvFile)
-            listFromFile = list(dataFromFile)
+    ##set permissions for accessing the file
+    #READ = "r"
+    #WRITE = "w"
+    ##r+ = read and write
+    #fileName = "words.txt"
 
-        wordList = []
-        wordList = listFromFile
+    #try :
+    #    with open(fileName, READ) as csvFile :
+    #        dataFromFile = csv.reader(csvFile)
+    #        listFromFile = list(dataFromFile)
 
-    except :
-        #Try to read file, if file not found, create file.
+    #    wordList = []
+    #    wordList = listFromFile
 
-        if FileNotFoundError :
-            print('File not found...')
-            createFile = input('Would you like us to create a new file for you? (Y) ').upper()
-            if createFile == "Y" :
-                file = open("words.txt", mode = WRITE)
-                file.write('Python') #Write the first line of the newly created txt file
-                file.close()
-                readFile() 
-            else :
-                welcomeMenu()
+    #except :
+    #    #Try to read file, if file not found, create file.
 
-    return(wordList) #return wordList derived from the words.txt file
+    #    if FileNotFoundError :
+    #        print('File not found...')
+    #        createFile = input('Would you like us to create a new file for you? (Y) ').upper()
+    #        if createFile == "Y" :
+    #            file = open("words.txt", mode = WRITE)
+    #            file.write('Python') #Write the first line of the newly created txt file
+    #            file.close()
+    #            readFile() 
+    #        else :
+    #            welcomeMenu()
+
+    return(words) #return words derived from the words.txt file
 
 def clearConsole(wait) : #function to clear console on Linux or Windows
    """Accepts an integer argument and produces a delay for the number of seconds passed as an argument\
