@@ -145,9 +145,20 @@ def check(word, guesses, guess) :
 def playGame() :
     """Determines if a users guess is correct and produces apropriate output."""
 
+    global userGuessLimit
+
     word = getWord()
     guesses = [] #keep track of users guesses in this list
     guessed = False
+
+    #while len(guesses) < guessLimit :
+    #    print()
+       #continue executing - TO DO
+    #   else :
+    #       print() 
+    #       print('You have reached the limit of guesses, please try again...')
+    #       print('Returning you to the menu... welcomeMenu()
+
     print('The word contains', len(word), ' letters.') #tells user how many letters are in the word
     while not guessed:
         text = 'Please enter 1 letter or a {}-letter word. '.format(len(word))
@@ -172,15 +183,6 @@ def playGame() :
         else :
             print('Invalid entry') #if user didn't enter 1 letter or a word with the same number of
             #letters as the answer word
-
-    #While the number of recorded guesses is less than the guess limit from guessLimit()
-    #while len(guesses) < global guessLimit :
-    #    print()
-       #continue executing - TO DO
-    #   else :
-    #       print() 
-    #       print('You have reached the limit of guesses, please try again...')
-    #       print('Returning you to the menu... welcomeMenu()
 
     #print statement will execute when the user exits the while loop
     print('Yes, the word is ', word + '! You got it in ', len(guesses), 'tried.')
