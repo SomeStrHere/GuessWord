@@ -9,21 +9,11 @@
 #Versioning: a.b.c
 #a = major change, b = smaller change, c = minor changes (bug fixes, etc)
 #
-#TO DO - how do do a docstring """What the function does goes here.""" put this in first line bellow 
-#function definition.
-#TO DO - regular expression example
-#    if not re.match("^[1-5]*$", menuChoice) or (int(menuChoice) > 5):
-#        print("Error! Only numbers 1-5 are allowed.")
-#        clearConsole(3)
-#        menu()
-#    else :
 
 #Import libraries
 import random
 import csv #I'd like to read a list of words from a csv file rather than have them coded in source
 import sys #Used to exit the program
-
-#Initialize variables and constants
 
 def welcomeMenu() :
     """Displays a welcome message to the user and gives a simple menu to start or exit the game."""
@@ -48,12 +38,12 @@ def welcomeMenu() :
         welcomeMenu() #reload the menu
 
 def get_word() : #original function to get word from hard coded file
-    #A function with a list of words
+
     words = ['Woodstock', 
              'Gary',
              'Sophie']
 
-    #words = (readFile())
+    #words = readFile()
 
     return random.choice(words).upper() #returns a random choice from these words
 
@@ -63,11 +53,15 @@ def readFile() : #Read the contents of file words.txt, if file isn't found creat
     #set permissions for accessing the file
     READ = "r"
     WRITE = "w"
+    fileName = "words.txt"
 
     try :
-        file = open("words.txt", mode = READ)
-        #display all contents from file
-        entireFile = file.read() #will return the entire file contents as one big string
+        with open(fileName, READ) as csvFile :
+            listFromFile = csv.reader(csvFile)
+
+        wordList = []
+        wordList = listFromFile
+
     except :
         #Try to read file, if file not found, create file.
 
@@ -76,15 +70,13 @@ def readFile() : #Read the contents of file words.txt, if file isn't found creat
             createFile = input('Would you like us to create a new file for you? (Y) ').upper()
             if createFile == "Y" :
                 file = open("words.txt", mode = WRITE)
-                file.write('Hackers\n') #Write the first line of the newly created txt file
-                file.write('Mitnick') #Write the second line of the newly created txt file
-                entireFile = file.read() 
+                file.write('Python') #Write the first line of the newly created txt file
+                file.close()
+                readFile() 
             else :
                 welcomeMenu()
-    finally :
-        file.close()
 
-    return(entireFile)
+    return(wordList) #return wordList derived from the words.txt file
 
 def clearConsole(wait) : #function to clear console on Linux or Windows
    """Accepts an integer argument and produces a delay for the number of seconds passed as an argument\
