@@ -39,25 +39,25 @@ def welcomeMenu() :
 
 def get_word() : #original function to get word from hard coded file
 
-    words = ['Woodstock', 
-             'Gary',
-             'Sophie']
+    words = ['Woodstock', 'Gary', 'Sophie']
 
     #words = readFile()
-
+    
     return random.choice(words).upper() #returns a random choice from these words
 
 def readFile() : #Read the contents of file words.txt, if file isn't found create it.
-    """Read contents of a txtt file."""
+    """Read contents of a txt file."""
 
     #set permissions for accessing the file
     READ = "r"
     WRITE = "w"
+    #r+ = read and write
     fileName = "words.txt"
 
     try :
         with open(fileName, READ) as csvFile :
-            listFromFile = csv.reader(csvFile)
+            dataFromFile = csv.reader(csvFile)
+            listFromFile = list(dataFromFile)
 
         wordList = []
         wordList = listFromFile
