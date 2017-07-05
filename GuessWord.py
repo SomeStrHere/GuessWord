@@ -167,7 +167,7 @@ def playGame() :
     #Added this overall while loop to test leng(guesses) which should give the number of times a user
     #guesses a word against a pre-defined/user set int variable called userGuessLimit.
 
-    print('\nThe word contains', len(word), ' letters.') #tells user how many letters are in the word
+    print('\nThe word contains', len(word), 'letters.') #tells user how many letters are in the word
     while (not guessed) and (len(guesses) < userGuessLimit):
         text = 'Please enter 1 letter or a {}-letter word. \n\n'.format(len(word))
         guess = input(text).upper()
