@@ -194,6 +194,10 @@ def playGame() :
     #print statement will execute when the user exits the while loop
     if(guessed) :
         print('\nYes, the word is ', word + '! You got it in ', len(guesses), 'tries.')
+        print('\nReturning you to the menu...')
+        clearConsole(4)
+        welcomeMenu()
+
     else :
         print('\nYou have reached the limit of guesses, please try again...')
         print('Returning you to the menu...')
