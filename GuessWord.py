@@ -17,14 +17,17 @@ import sys #Used to exit the program
 
 #Global variables
 userGuessLimit = 8 #set defaul number to 8
-
-def welcomeMenu() :
-    """Displays a welcome message to the user and gives a simple menu to start or exit the game."""
+def gameLogo() : #Seperated the games console logo so it can be re-used more efficiently
     print('\n########################')
     print('#                      #')
     print('#      Guess Word      #')
     print('#                      #')
     print('########################\n')
+
+def welcomeMenu() :
+    """Displays a welcome message to the user and gives a simple menu to start or exit the game."""
+    gameLogo() #Displays the games logo; in different function, so it can be efficiently re-used
+    #seperatley from the menu components.
 
     print('Please enter (1) Play Game or (2) Exit Game\n')
     print('Optional: You can alter the default guess limit by pressing (0).\n')
