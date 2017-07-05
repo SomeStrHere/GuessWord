@@ -32,7 +32,7 @@ def welcomeMenu() :
     #seperatley from the menu components.
 
     print('Please enter (1) Play Game or (2) Exit Game\n')
-    print('Optional: You can alter the default guess limit by pressing (0).\n')
+    print('Optional: You can alter the default settings by pressing (0).\n')
     menuOption = input()
 
     if menuOption == '1' :
