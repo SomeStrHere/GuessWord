@@ -5,7 +5,7 @@
 #https://www.youtube.com/watch?v=5aAkDVXxNhk&index=5&list=PLhP5GzqIk6qsYjU_3tod0nqoWGXlq9RvF and
 #https://knightlab.northwestern.edu/2014/06/05/five-mini-programming-projects-for-the-python-beginner/
 #
-#Version 1.0.0
+#Version 1.1.0
 #Versioning: a.b.c
 #a = major change, b = smaller change, c = minor changes (bug fixes, etc)
 #
@@ -84,7 +84,7 @@ def readFile() : #Read the contents of file words.txt, if file isn't found creat
 
     #set permissions for accessing the file
     READ = 'r'
-    WRITE = "w"
+    WRITE = 'w'
     #r+ = read and write
     fileName = "words.txt"
 
@@ -92,10 +92,9 @@ def readFile() : #Read the contents of file words.txt, if file isn't found creat
         #used this approach so closing file is handled automatically
         #previousl wasn't able to call dictionary.close() in finally to close the file.
         with open(fileName, READ) as f :
-            dictionary = f.readlines()
+            dictionary = f.readlines() #Reads the entire file
 
-       #dictionary = open(fileName, READ).readlines() #working implementation
-        words = [word.strip() for word in dictionary] #working implementation
+        words = [word.strip() for word in dictionary] #Seperates each word to create a list of words
 
     except : #Try to read file, if file not found, create file.
 
@@ -152,7 +151,7 @@ def playGame() :
     #Added this overall while loop to test leng(guesses) which should give the number of times a user
     #guesses a word against a pre-defined/user set int variable called userGuessLimit.
 
-    print('The word contains', len(word), ' letters.') #tells user how many letters are in the word
+    print('\nThe word contains', len(word), ' letters.') #tells user how many letters are in the word
     while (not guessed) and (len(guesses) < userGuessLimit):
         text = 'Please enter 1 letter or a {}-letter word. '.format(len(word))
         guess = input(text).upper()
