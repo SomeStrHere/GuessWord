@@ -56,6 +56,7 @@ def guessLimit() : #obtain a guess limit from the user and return the limit numb
     """Asks the user to select how many attempts they want at guessing the word."""
     
     global userGuessLimit
+    default = False
 
     print("How many attempts would you like to have?\n")
     print('(A) Up to 20 guesses!\n')
@@ -74,9 +75,16 @@ def guessLimit() : #obtain a guess limit from the user and return the limit numb
         userGuessLimit = 3
 
     else :
+        default = True
         userGuessLimit = userGuessLimit
 
-    print('Thank you, you have selected %d guesess.\n' % userGuessLimit)
+    clearConsole(0)
+    gameLogo()
+
+    if default :
+        print('Thank you, the game will start with the default number of guesses')# % userGuessLimit
+    else :
+        print('Thank you, you have selected %d guesess.\n' % userGuessLimit)
 
     playGame() #Once the user sets the guess limit, start the game
 
