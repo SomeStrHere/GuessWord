@@ -34,14 +34,19 @@ def welcomeMenu() :
     menuOption = input()
 
     if menuOption == '1' :
+        clearConsole(0)
+        gameLogo()
         playGame()
 
     elif menuOption == '2' :
         print('\nThank you for playing...\n')
         clearConsole(1)
+        gameLogo()
         sys.exit()
 
     elif menuOption == '0' :
+        clearConsole(0)
+        gameLogo()
         guessLimit()
     else :
         clearConsole(0) #clear console without a delay
