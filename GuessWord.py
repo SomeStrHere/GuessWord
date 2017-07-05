@@ -5,7 +5,7 @@
 #https://www.youtube.com/watch?v=5aAkDVXxNhk&index=5&list=PLhP5GzqIk6qsYjU_3tod0nqoWGXlq9RvF and
 #https://knightlab.northwestern.edu/2014/06/05/five-mini-programming-projects-for-the-python-beginner/
 #
-#Version 1.0.0
+#Version 1.1.0
 #Versioning: a.b.c
 #a = major change, b = smaller change, c = minor changes (bug fixes, etc)
 #
@@ -17,28 +17,36 @@ import sys #Used to exit the program
 
 #Global variables
 userGuessLimit = 8 #set defaul number to 8
-
-def welcomeMenu() :
-    """Displays a welcome message to the user and gives a simple menu to start or exit the game."""
+def gameLogo() : #Seperated the games console logo so it can be re-used more efficiently
     print('\n########################')
     print('#                      #')
     print('#      Guess Word      #')
     print('#                      #')
     print('########################\n')
 
+def welcomeMenu() :
+    """Displays a welcome message to the user and gives a simple menu to start or exit the game."""
+    gameLogo() #Displays the games logo; in different function, so it can be efficiently re-used
+    #seperatley from the menu components.
+
     print('Please enter (1) Play Game or (2) Exit Game\n')
     print('Optional: You can alter the default guess limit by pressing (0).\n')
     menuOption = input()
 
     if menuOption == '1' :
+        clearConsole(0)
+        gameLogo()
         playGame()
 
     elif menuOption == '2' :
         print('\nThank you for playing...\n')
         clearConsole(1)
+        gameLogo()
         sys.exit()
 
     elif menuOption == '0' :
+        clearConsole(0)
+        gameLogo()
         guessLimit()
     else :
         clearConsole(0) #clear console without a delay
@@ -48,6 +56,7 @@ def guessLimit() : #obtain a guess limit from the user and return the limit numb
     """Asks the user to select how many attempts they want at guessing the word."""
     
     global userGuessLimit
+    default = False
 
     print("How many attempts would you like to have?\n")
     print('(A) Up to 20 guesses!\n')
@@ -66,9 +75,16 @@ def guessLimit() : #obtain a guess limit from the user and return the limit numb
         userGuessLimit = 3
 
     else :
+        default = True
         userGuessLimit = userGuessLimit
 
-    print('Thank you, you have selected %d guesess.\n' % userGuessLimit)
+    clearConsole(0)
+    gameLogo()
+
+    if default :
+        print('Thank you, the game will start with the default number of guesses')# % userGuessLimit
+    else :
+        print('Thank you, you have selected %d guesess.\n' % userGuessLimit)
 
     playGame() #Once the user sets the guess limit, start the game
 
@@ -84,7 +100,7 @@ def readFile() : #Read the contents of file words.txt, if file isn't found creat
 
     #set permissions for accessing the file
     READ = 'r'
-    WRITE = "w"
+    WRITE = 'w'
     #r+ = read and write
     fileName = "words.txt"
 
@@ -92,10 +108,9 @@ def readFile() : #Read the contents of file words.txt, if file isn't found creat
         #used this approach so closing file is handled automatically
         #previousl wasn't able to call dictionary.close() in finally to close the file.
         with open(fileName, READ) as f :
-            dictionary = f.readlines()
+            dictionary = f.readlines() #Reads the entire file
 
-       #dictionary = open(fileName, READ).readlines() #working implementation
-        words = [word.strip() for word in dictionary] #working implementation
+        words = [word.strip() for word in dictionary] #Seperates each word to create a list of words
 
     except : #Try to read file, if file not found, create file.
 
@@ -134,11 +149,11 @@ def check(word, guesses, guess) :
             matches += 1 #record number of matches for the users guess
     
     if matches > 1 :
-        print('Yes! The word contains', matches, '"' + guess + '"' + 's' )
+        print('\nYes! The word contains', matches, '"' + guess + '"' + 's' )
     elif matches == 1 :
-        print('Yes! The word contains', matches, '"' + guess + '"')
+        print('\nYes! The word contains', matches, '"' + guess + '"')
     else :
-        print('Sorry. The word does not contain the letter "', guess + '"')
+        print('\nSorry. The word does not contain the letter "', guess + '"')
 
     return(status)
 
@@ -152,19 +167,19 @@ def playGame() :
     #Added this overall while loop to test leng(guesses) which should give the number of times a user
     #guesses a word against a pre-defined/user set int variable called userGuessLimit.
 
-    print('The word contains', len(word), ' letters.') #tells user how many letters are in the word
+    print('\nThe word contains', len(word), ' letters.') #tells user how many letters are in the word
     while (not guessed) and (len(guesses) < userGuessLimit):
-        text = 'Please enter 1 letter or a {}-letter word. '.format(len(word))
+        text = 'Please enter 1 letter or a {}-letter word. \n\n'.format(len(word))
         guess = input(text).upper()
         if guess in guesses :
-            print('You already guessed "' + guess + '"')
+            print('\nYou already guessed "' + guess + '"')
         elif len(guess) == len(word) :
             #if users guess is same length as the answer word, assign it to guesses
             guesses.append(guess)
             if guess == word :
                 guessed = True
             else :
-                print('Sorry, that is incorrect.')
+                print('\nSorry, that is incorrect.')
 
         elif len(guess) == 1 :
             guesses.append(guess)
@@ -174,14 +189,19 @@ def playGame() :
             else :
                 print(result)
         else :
-            print('Invalid entry')
+            print('\nInvalid entry')
 
     #print statement will execute when the user exits the while loop
     if(guessed) :
         print('\nYes, the word is ', word + '! You got it in ', len(guesses), 'tries.')
+        print('\nReturning you to the menu...')
+        clearConsole(4)
+        welcomeMenu()
+
     else :
-        print('You have reached the limit of guesses, please try again...')
-        print('Returning you to the menu...') 
+        print('\nYou have reached the limit of guesses, please try again...')
+        print('Returning you to the menu...')
+        clearConsole(4)
         welcomeMenu()
 
 def main() :
