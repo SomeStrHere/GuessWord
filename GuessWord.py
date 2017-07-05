@@ -61,12 +61,16 @@ def guessLimit() : #obtain a guess limit from the user and return the limit numb
     global difficulty
     default = False
 
-    userDifficulty = input('If you wish to use the advanced word list, please press Y, or press\
- any key for default ').upper()
+    userDifficulty = input('Press (Y) to use the advanced word list\n...or press\
+ any other key for the default. ').upper()
     if userDifficulty == 'Y' :
         difficulty = "advanced"
     else :
         difficulty = difficulty
+
+    print("\nThank you, you're using the " + difficulty + " word list...")
+    clearConsole(2)
+    gameLogo()
 
     print("How many attempts would you like to have?\n")
     print('(A) Up to 20 guesses!\n')
