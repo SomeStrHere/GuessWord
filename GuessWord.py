@@ -117,7 +117,13 @@ def readFile() : #Read the contents of file words.txt, if file isn't found creat
     READ = 'r'
     WRITE = 'w'
     #r+ = read and write
-    fileName = "words.txt"
+    fileName = ""
+
+    if difficulty == 'advanced' :
+        fileName = "advanced.txt"
+    else :
+        fileName = "words.txt"
+
 
     try :
         #used this approach so closing file is handled automatically
