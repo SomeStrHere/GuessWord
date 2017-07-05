@@ -22,6 +22,8 @@ Display
 Domain
 Download
 Internet
+Firefox
+Browser
 Ethernet
 Network
 Browser
