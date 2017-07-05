@@ -133,11 +133,11 @@ def check(word, guesses, guess) :
             matches += 1 #record number of matches for the users guess
     
     if matches > 1 :
-        print('Yes! The word contains', matches, '"' + guess + '"' + 's' )
+        print('\nYes! The word contains', matches, '"' + guess + '"' + 's' )
     elif matches == 1 :
-        print('Yes! The word contains', matches, '"' + guess + '"')
+        print('\nYes! The word contains', matches, '"' + guess + '"')
     else :
-        print('Sorry. The word does not contain the letter "', guess + '"')
+        print('\nSorry. The word does not contain the letter "', guess + '"')
 
     return(status)
 
@@ -153,17 +153,17 @@ def playGame() :
 
     print('\nThe word contains', len(word), ' letters.') #tells user how many letters are in the word
     while (not guessed) and (len(guesses) < userGuessLimit):
-        text = 'Please enter 1 letter or a {}-letter word. '.format(len(word))
+        text = 'Please enter 1 letter or a {}-letter word. \n\n'.format(len(word))
         guess = input(text).upper()
         if guess in guesses :
-            print('You already guessed "' + guess + '"')
+            print('\nYou already guessed "' + guess + '"')
         elif len(guess) == len(word) :
             #if users guess is same length as the answer word, assign it to guesses
             guesses.append(guess)
             if guess == word :
                 guessed = True
             else :
-                print('Sorry, that is incorrect.')
+                print('\nSorry, that is incorrect.')
 
         elif len(guess) == 1 :
             guesses.append(guess)
@@ -173,7 +173,7 @@ def playGame() :
             else :
                 print(result)
         else :
-            print('Invalid entry')
+            print('\nInvalid entry')
 
     #print statement will execute when the user exits the while loop
     if(guessed) :
