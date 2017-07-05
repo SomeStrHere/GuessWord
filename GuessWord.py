@@ -179,8 +179,9 @@ def playGame() :
     if(guessed) :
         print('\nYes, the word is ', word + '! You got it in ', len(guesses), 'tries.')
     else :
-        print('You have reached the limit of guesses, please try again...')
-        print('Returning you to the menu...') 
+        print('\nYou have reached the limit of guesses, please try again...')
+        print('Returning you to the menu...')
+        clearConsole(4)
         welcomeMenu()
 
 def main() :
