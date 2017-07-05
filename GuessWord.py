@@ -5,7 +5,7 @@
 #https://www.youtube.com/watch?v=5aAkDVXxNhk&index=5&list=PLhP5GzqIk6qsYjU_3tod0nqoWGXlq9RvF and
 #https://knightlab.northwestern.edu/2014/06/05/five-mini-programming-projects-for-the-python-beginner/
 #
-#Version 1.1.0
+#Version 1.1.1
 #Versioning: a.b.c
 #a = major change, b = smaller change, c = minor changes (bug fixes, etc)
 #
@@ -17,6 +17,8 @@ import sys #Used to exit the program
 
 #Global variables
 userGuessLimit = 8 #set defaul number to 8
+userDifficulty = "Default" #default uses words.txt, advanced uses advanced.txt
+
 def gameLogo() : #Seperated the games console logo so it can be re-used more efficiently
     print('\n########################')
     print('#                      #')
