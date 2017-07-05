@@ -17,7 +17,7 @@ import sys #Used to exit the program
 
 #Global variables
 userGuessLimit = 8 #set defaul number to 8
-userDifficulty = "Default" #default uses words.txt, advanced uses advanced.txt
+difficulty = "default" #default uses words.txt, advanced uses advanced.txt
 
 def gameLogo() : #Seperated the games console logo so it can be re-used more efficiently
     print('\n########################')
@@ -58,7 +58,15 @@ def guessLimit() : #obtain a guess limit from the user and return the limit numb
     """Asks the user to select how many attempts they want at guessing the word."""
     
     global userGuessLimit
+    global difficulty
     default = False
+
+    userDifficulty = input('If you wish to use the advanced word list, please press Y, or press\
+ any key for default ').upper()
+    if userDifficulty == 'Y' :
+        difficulty = "advanced"
+    else :
+        difficulty = difficulty
 
     print("How many attempts would you like to have?\n")
     print('(A) Up to 20 guesses!\n')
@@ -88,6 +96,9 @@ def guessLimit() : #obtain a guess limit from the user and return the limit numb
     else :
         print('Thank you, you have selected %d guesess.\n' % userGuessLimit)
 
+    #pass default or advanced to playGame() depending on user selection to change the difficulty
+    #based on a different wordlist.
+
     playGame() #Once the user sets the guess limit, start the game
 
 def getWord() : 
@@ -99,6 +110,8 @@ def getWord() :
 
 def readFile() : #Read the contents of file words.txt, if file isn't found create it.
     """Read contents of a words.txt file and returns a list of words."""
+
+    global difficulty
 
     #set permissions for accessing the file
     READ = 'r'
