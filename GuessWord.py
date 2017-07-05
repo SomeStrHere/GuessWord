@@ -83,7 +83,7 @@ def readFile() : #Read the contents of file words.txt, if file isn't found creat
     """Read contents of a words.txt file and returns a list of words."""
 
     #set permissions for accessing the file
-    READ = "r"
+    READ = 'r'
     WRITE = "w"
     #r+ = read and write
     fileName = "words.txt"
@@ -145,44 +145,40 @@ def check(word, guesses, guess) :
 def playGame() :
     """Determines if a users guess is correct and produces apropriate output."""
 
-    global userGuessLimit
     word = getWord()
     guesses = [] #keep track of users guesses in this list    
     guessed = False
 
     #Added this overall while loop to test leng(guesses) which should give the number of times a user
     #guesses a word against a pre-defined/user set int variable called userGuessLimit.
-    while (len(guesses) < userGuessLimit) :
 
-        print('The word contains', len(word), ' letters.') #tells user how many letters are in the word
-        while not guessed:
-            text = 'Please enter 1 letter or a {}-letter word. '.format(len(word))
-            guess = input(text).upper()
-            if guess in guesses :
-                print('You already guessed "' + guess + '"')
-            elif len(guess) == len(word) :
-                #if users guess is same length as the answer word, assign it to guesses
-                guesses.append(guess)
-                if guess == word :
-                    guessed = True
-                else :
-                    print('Sorry, that is incorrect.')
-
-            elif len(guess) == 1 :
-                guesses.append(guess)
-                result = check(word, guesses, guess)
-                if result == word :
-                    guessed = True
-                else :
-                    print(result)
+    print('The word contains', len(word), ' letters.') #tells user how many letters are in the word
+    while (not guessed) and (len(guesses) < userGuessLimit):
+        text = 'Please enter 1 letter or a {}-letter word. '.format(len(word))
+        guess = input(text).upper()
+        if guess in guesses :
+            print('You already guessed "' + guess + '"')
+        elif len(guess) == len(word) :
+            #if users guess is same length as the answer word, assign it to guesses
+            guesses.append(guess)
+            if guess == word :
+                guessed = True
             else :
-                print('Invalid entry')
+                print('Sorry, that is incorrect.')
 
-        #print statement will execute when the user exits the while loop
+        elif len(guess) == 1 :
+            guesses.append(guess)
+            result = check(word, guesses, guess)
+            if result == word :
+                guessed = True
+            else :
+                print(result)
+        else :
+            print('Invalid entry')
+
+    #print statement will execute when the user exits the while loop
+    if(guessed) :
         print('\nYes, the word is ', word + '! You got it in ', len(guesses), 'tries.')
-        break #added to make sure "limit of guesses" message doesn't follow the above when
-    #the user guesses the word correctly. #Seems to work in initial testing.
-
     else :
         print('You have reached the limit of guesses, please try again...')
         print('Returning you to the menu...') 
